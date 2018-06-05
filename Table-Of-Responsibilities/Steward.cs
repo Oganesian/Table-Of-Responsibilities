@@ -1,4 +1,6 @@
-﻿namespace Table_Of_Responsibilities
+﻿using System.IO;
+
+namespace Table_Of_Responsibilities
 {
     class Steward
     {
@@ -32,14 +34,29 @@
             set { canServeWithAMicrophone = value; }
         }
 
-        void saveToFile()
+        void saveToFile(string path)
         {
-
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                sw.WriteLine(surname + " " + name);
+                sw.WriteLine("Распорядитель = " + canBeTheManager);
+                sw.WriteLine("Пульт = " + canUseTheControlPanel);
+                sw.WriteLine("Микрофоны и трибуна = " + canServeWithAMicrophone);
+            }
         }
 
-        string getFromFile()
+        void setFromFile(string path)
         {
-            return "";
+            using (StreamReader sr = File.OpenText(path))
+            {
+                string surnameAndName = sr.ReadLine();
+                string[] split = surnameAndName.Split(' ');
+                surname = split[0];
+                name = split[1];
+                canBeTheManager = sr.ReadLine().Contains("true");
+                canUseTheControlPanel = sr.ReadLine().Contains("true");
+                canServeWithAMicrophone = sr.ReadLine().Contains("true");
+            }
         }
     }
 }
