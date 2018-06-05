@@ -4,39 +4,54 @@ namespace Table_Of_Responsibilities
 {
     class Steward
     {
-        string name
-        {
-            get { return name; }
-            set { name = value; }
-        }
+        string surname;
+        string name;
+        bool canBeTheManager;
+        bool canUseTheControlPanel;
+        bool canServeWithAMicrophone;
 
-        string surname
+        string Surname
         {
             get { return surname; }
             set { surname = value; }
         }
 
-        bool canBeTheManager
+        string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        bool CanBeTheManager
         {
             get { return canBeTheManager; }
             set { canBeTheManager = value; }
         }
 
-        bool canUseTheControlPanel
+        bool CanUseTheControlPanel
         {
             get { return canUseTheControlPanel; }
             set { canUseTheControlPanel = value; }
         }
 
-        bool canServeWithAMicrophone
+        bool CanServeWithAMicrophone
         {
             get { return canServeWithAMicrophone; }
             set { canServeWithAMicrophone = value; }
         }
 
-        void saveToFile(string path)
+        public Steward(string s, string n, bool m, bool p, bool mic)
         {
-            using (StreamWriter sw = File.CreateText(path))
+            surname = s;
+            name = n;
+            canBeTheManager = m;
+            canUseTheControlPanel = p;
+            canServeWithAMicrophone = mic;
+        }
+
+        public void saveToFile()
+        {
+            using (StreamWriter sw = File.CreateText("Stewards/" + surname + " " + name + ".cstw"))
             {
                 sw.WriteLine(surname + " " + name);
                 sw.WriteLine("Распорядитель = " + canBeTheManager);
@@ -45,17 +60,17 @@ namespace Table_Of_Responsibilities
             }
         }
 
-        void setFromFile(string path)
+        public void setFromFile()
         {
-            using (StreamReader sr = File.OpenText(path))
+            using (StreamReader sr = File.OpenText("Stewards/" + surname + " " + name + ".cstw"))
             {
                 string surnameAndName = sr.ReadLine();
                 string[] split = surnameAndName.Split(' ');
                 surname = split[0];
                 name = split[1];
-                canBeTheManager = sr.ReadLine().Contains("true");
-                canUseTheControlPanel = sr.ReadLine().Contains("true");
-                canServeWithAMicrophone = sr.ReadLine().Contains("true");
+                canBeTheManager = sr.ReadLine().Contains("True");
+                canUseTheControlPanel = sr.ReadLine().Contains("True");
+                canServeWithAMicrophone = sr.ReadLine().Contains("True");
             }
         }
     }

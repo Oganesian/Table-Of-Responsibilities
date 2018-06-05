@@ -7,8 +7,22 @@
         mc:Ignorable="d"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterOwner"
-        Title="AddSteward" Height="300" Width="300">
+        BorderThickness="1"
+        BorderBrush="#FF086F9E"
+        Title="AddSteward" Height="303.315" Width="457.459">
     <Grid>
-        
+        <TextBox x:Name="StewardName"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center"
+            Margin="0,36,0,0"
+            Width="242"
+            Height="40"
+            Controls:TextBoxHelper.ClearTextButton="True"
+            Controls:TextBoxHelper.Watermark="Фамилия Имя"/>
+        <CheckBox Name="manager" Content="Распорядитель" Height="20" Width="300" Margin="56,96,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <CheckBox Name="panel" Content="Пульт" Height="20" Width="300" Margin="56,126,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <CheckBox Name="microphone" Content="Трибуна, микрофон" Height="20" Width="300" Margin="56,156,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <Button Content="Добавить" HorizontalAlignment="Center" Margin="0,0,0,20" Width="140" FontSize="14" Height="40" VerticalAlignment="Bottom" Click="Button_Click"/>
+
     </Grid>
 </Controls:MetroWindow>

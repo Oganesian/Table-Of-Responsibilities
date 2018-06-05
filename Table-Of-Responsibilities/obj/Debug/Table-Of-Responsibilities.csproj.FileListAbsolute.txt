@@ -19,3 +19,5 @@ C:\Users\bezim\source\repos\Table-Of-Responsibilities\Table-Of-Responsibilities\
 C:\Users\bezim\source\repos\Table-Of-Responsibilities\Table-Of-Responsibilities\obj\Debug\Table-Of-Responsibilities.pdb
 C:\Users\bezim\source\repos\Table-Of-Responsibilities\Table-Of-Responsibilities\obj\Debug\interface\Colors.baml
 C:\Users\bezim\source\repos\Table-Of-Responsibilities\Table-Of-Responsibilities\obj\Debug\interface\TextBox.baml
+C:\Users\bezim\source\repos\Table-Of-Responsibilities\Table-Of-Responsibilities\obj\Debug\AddSteward.baml
+C:\Users\bezim\source\repos\Table-Of-Responsibilities\Table-Of-Responsibilities\obj\Debug\AddSteward.g.cs

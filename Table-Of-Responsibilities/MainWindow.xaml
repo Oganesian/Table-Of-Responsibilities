@@ -28,7 +28,7 @@
                             Height="42"
                             Controls:TextBoxHelper.UseFloatingWatermark="True"
                             Controls:TextBoxHelper.Watermark="Конец периода" />
-                    <Button Content="Ввод" HorizontalAlignment="Center" Margin="0,0,0,20" Width="120" FontSize="14" Height="41" VerticalAlignment="Bottom"/>
+                    <Button Content="СОЗДАТЬ" HorizontalAlignment="Center" Margin="0,0,0,20" Width="120" FontSize="14" Height="41" VerticalAlignment="Bottom"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Участники">
@@ -45,8 +45,8 @@
                     <CheckBox Content="Распорядитель" Height="20" Width="300" Margin="80,96,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                     <CheckBox Content="Пульт" Height="20" Width="300" Margin="80,126,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                     <CheckBox Content="Трибуна, микрофон" Height="20" Width="300" Margin="80,156,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <Button Content="Сохранить" HorizontalAlignment="Center" Margin="0,0,160,20" Width="140" FontSize="14" Height="40" VerticalAlignment="Bottom"/>
-                    <Button Content="Добавить" HorizontalAlignment="Center" Margin="160,0,0,20" Width="140" FontSize="14" Height="40" VerticalAlignment="Bottom"/>
+                    <Button Content="Сохранить" HorizontalAlignment="Center" Margin="0,0,160,20" Width="140" FontSize="14" Height="40" VerticalAlignment="Bottom" IsEnabled="False"/>
+                    <Button Content="Добавить" HorizontalAlignment="Center" Margin="160,0,0,20" Width="140" FontSize="14" Height="40" VerticalAlignment="Bottom" Click="Button_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

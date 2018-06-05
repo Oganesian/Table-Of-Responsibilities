@@ -1,4 +1,7 @@
-﻿namespace Table_Of_Responsibilities
+﻿using System;
+using System.Windows;
+
+namespace Table_Of_Responsibilities
 {
     /// <summary>
     /// Логика взаимодействия для AddSteward.xaml
@@ -8,6 +11,31 @@
         public AddSteward()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            string surnameAndName = StewardName.Text;
+            if (surnameAndName != "" && surnameAndName != null)
+            {
+                string[] split = surnameAndName.Split(' ');
+                string surname = split[0];
+                string name = split[1];
+                bool canBeTheManager = manager.IsChecked ?? false;
+                bool canUseTheControlPanel = panel.IsChecked ?? false;
+                bool canServeWithAMicrophone = microphone.IsChecked ?? false;
+                Steward steward = 
+                    new Steward(surname, name, canBeTheManager, canUseTheControlPanel, canServeWithAMicrophone);
+                steward.saveToFile();
+                StewardName.Text = "";
+                manager.IsChecked = false;
+                panel.IsChecked = false;
+                microphone.IsChecked = false;
+            }
+            else
+            {
+                MessageBox.Show("Вы не ввели фамилию и имя");
+            }
         }
     }
 }
