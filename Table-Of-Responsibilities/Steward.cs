@@ -10,31 +10,31 @@ namespace Table_Of_Responsibilities
         bool canUseTheControlPanel;
         bool canServeWithAMicrophone;
 
-        string Surname
+        public string Surname
         {
             get { return surname; }
             set { surname = value; }
         }
 
-        string Name
+        public string Name
         {
             get { return name; }
             set { name = value; }
         }
 
-        bool CanBeTheManager
+        public bool CanBeTheManager
         {
             get { return canBeTheManager; }
             set { canBeTheManager = value; }
         }
 
-        bool CanUseTheControlPanel
+        public bool CanUseTheControlPanel
         {
             get { return canUseTheControlPanel; }
             set { canUseTheControlPanel = value; }
         }
 
-        bool CanServeWithAMicrophone
+        public bool CanServeWithAMicrophone
         {
             get { return canServeWithAMicrophone; }
             set { canServeWithAMicrophone = value; }
@@ -47,6 +47,20 @@ namespace Table_Of_Responsibilities
             canBeTheManager = m;
             canUseTheControlPanel = p;
             canServeWithAMicrophone = mic;
+        }
+
+        public Steward(string path)
+        {
+            using (StreamReader sr = File.OpenText(path))
+            {
+                string surnameAndName = sr.ReadLine();
+                string[] split = surnameAndName.Split(' ');
+                surname = split[0];
+                name = split[1];
+                canBeTheManager = sr.ReadLine().Contains("True");
+                canUseTheControlPanel = sr.ReadLine().Contains("True");
+                canServeWithAMicrophone = sr.ReadLine().Contains("True");
+            }
         }
 
         public void saveToFile()

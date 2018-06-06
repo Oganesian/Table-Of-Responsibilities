@@ -16,7 +16,7 @@ namespace Table_Of_Responsibilities
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             string surnameAndName = StewardName.Text;
-            if (surnameAndName != "" && surnameAndName != null)
+            if (surnameAndName != "" && surnameAndName != null && surnameAndName.Contains(" "))
             {
                 string[] split = surnameAndName.Split(' ');
                 string surname = split[0];
@@ -34,8 +34,15 @@ namespace Table_Of_Responsibilities
             }
             else
             {
-                MessageBox.Show("Вы не ввели фамилию и имя");
+                MessageBox.Show("Неверный ввод фамилии и имени. Образец: Иванов Иван");
             }
+        }
+
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Owner.Activate();
+            MainWindow ow = (MainWindow)Owner;
+            ow.UpdateStewards();
         }
     }
 }

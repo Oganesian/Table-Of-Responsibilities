@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="357.5" Width="520">
+        Title="MainWindow" Height="357.5" Width="520" Loaded="MetroWindow_Loaded">
     <Grid>
         <TabControl>
             <TabItem Header="Таблица">
@@ -33,19 +33,19 @@
             </TabItem>
             <TabItem Header="Участники">
                 <Grid>
-                    <ComboBox x:Name="Steward"
+                    <ComboBox x:Name="StewardBox"
                             VerticalAlignment="Top"
                             HorizontalAlignment="Left"
                             Margin="80,36,0,0"
                             Width="242"
                             Height="40"
                             Controls:TextBoxHelper.ClearTextButton="True"
-                            Controls:TextBoxHelper.Watermark="Фамилия Имя">
+                            Controls:TextBoxHelper.Watermark="Фамилия Имя" SelectionChanged="StewardBox_SelectionChanged">
                     </ComboBox>
-                    <CheckBox Content="Распорядитель" Height="20" Width="300" Margin="80,96,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <CheckBox Content="Пульт" Height="20" Width="300" Margin="80,126,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <CheckBox Content="Трибуна, микрофон" Height="20" Width="300" Margin="80,156,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <Button Content="Сохранить" HorizontalAlignment="Center" Margin="0,0,160,20" Width="140" FontSize="14" Height="40" VerticalAlignment="Bottom" IsEnabled="False"/>
+                    <CheckBox Name="manager"  Content="Распорядитель" Height="20" Width="300" Margin="80,96,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <CheckBox Name="panel" Content="Пульт" Height="20" Width="300" Margin="80,126,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <CheckBox Name="microphone" Content="Трибуна, микрофон" Height="20" Width="300" Margin="80,156,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <Button Name="SaveButton" Content="Сохранить" HorizontalAlignment="Center" Margin="0,0,160,20" Width="140" FontSize="14" Height="40" VerticalAlignment="Bottom" IsEnabled="False" Click="SaveButton_Click"/>
                     <Button Content="Добавить" HorizontalAlignment="Center" Margin="160,0,0,20" Width="140" FontSize="14" Height="40" VerticalAlignment="Bottom" Click="Button_Click"/>
                 </Grid>
             </TabItem>

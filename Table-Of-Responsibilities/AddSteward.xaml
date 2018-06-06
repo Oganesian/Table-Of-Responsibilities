@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterOwner"
         BorderThickness="1"
         BorderBrush="#FF086F9E"
-        Title="AddSteward" Height="303.315" Width="457.459">
+        Title="AddSteward" Height="303.315" Width="457.459" Closing="MetroWindow_Closing">
     <Grid>
         <TextBox x:Name="StewardName"
             VerticalAlignment="Top"
