@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Linq;
 
 namespace Table_Of_Responsibilities
 {
@@ -35,9 +36,6 @@ namespace Table_Of_Responsibilities
                 foreach (string dir in dirs)
                 {
                     string surnameAndName = dir.Replace("Stewards/", "").Replace(".cstw", "");
-                    string[] split = surnameAndName.Split(' ');
-                    string surname = split[0];
-                    string name = split[1];
                     Steward temp = new Steward(dir);
                     properties[index, 0] = temp.CanBeTheManager;
                     properties[index, 1] = temp.CanUseTheControlPanel;
@@ -55,7 +53,7 @@ namespace Table_Of_Responsibilities
             }
             catch (Exception ex)
             {
-                MessageBox.Show("The process failed: {0}", ex.ToString());
+                MessageBox.Show("Ошибка: {0}", ex.ToString());
             }
         }
 
@@ -105,6 +103,150 @@ namespace Table_Of_Responsibilities
             else
             {
                 manager.IsChecked = panel.IsChecked = microphone.IsChecked = false;
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (begin.Text != "" && end.Text != "")
+            {
+                DateTime beginDate = begin.SelectedDate.Value;
+                DateTime endDate = end.SelectedDate.Value;
+
+                int offset_1;
+                int offset_2;
+
+                List<DateTime> dates = new List<DateTime>();
+
+                while (beginDate.DayOfWeek != DayOfWeek.Monday && beginDate.DayOfWeek != DayOfWeek.Saturday)
+                {
+                    beginDate = beginDate.AddDays(1);
+                }
+                if (beginDate.DayOfWeek == DayOfWeek.Monday)
+                {
+                    offset_1 = 5;
+                    offset_2 = 2;
+                }
+                else
+                {
+                    offset_1 = 2;
+                    offset_2 = 5;
+                }
+
+                dates.Add(beginDate);
+
+                while (true)
+                {
+                    beginDate = beginDate.AddDays(offset_1);
+                    if (beginDate > endDate) break;
+                    dates.Add(beginDate);
+                    beginDate = beginDate.AddDays(offset_2);
+                    if (beginDate > endDate) break;
+                    dates.Add(beginDate);
+                }
+
+                List<Steward> stewards = new List<Steward>();
+
+                List<Steward> managerCandidates = new List<Steward>();
+                List<Steward> panelCandidates = new List<Steward>();
+                List<Steward> microphoneCandidates = new List<Steward>();
+
+                List<List<Steward>> weeks = new List<List<Steward>>();
+
+                int index = 0;
+                try
+                {
+                    string[] dirs = Directory.GetFiles("Stewards/", "*.cstw");
+                    foreach (string dir in dirs)
+                    {
+                        stewards.Add(new Steward(dir));
+                        if (stewards[index].CanBeTheManager) managerCandidates.Add(stewards[index]);
+                        if (stewards[index].CanUseTheControlPanel) panelCandidates.Add(stewards[index]);
+                        if (stewards[index].CanServeWithAMicrophone) microphoneCandidates.Add(stewards[index]);
+                        index++;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Ошибка: {0}", ex.ToString());
+                }
+                int managersIndex = 0;
+                int panelersIndex = 0;
+                int microphonersIndex = 0;
+                var rnd = new Random();
+                managerCandidates = managerCandidates.OrderBy(item => rnd.Next()).ToList();
+                panelCandidates = panelCandidates.OrderBy(item => rnd.Next()).ToList();
+                microphoneCandidates = microphoneCandidates.OrderBy(item => rnd.Next()).ToList();
+                for (int i = 0; i < 9; i++)
+                {
+                    List<Steward> week = new List<Steward>();
+                    // Managers
+                    for (int j = 0; j < 2; j++)
+                    {
+                        if (managersIndex >= managerCandidates.Count - 1) managersIndex = 0;
+                        if (week.IndexOf(managerCandidates[managersIndex]) == -1)
+                        {
+                            week.Add(managerCandidates[managersIndex++]);
+                        }
+                        else
+                        {
+                            while (week.IndexOf(managerCandidates[managersIndex]) > -1)
+                            {
+                                managersIndex++;
+                                if (managersIndex >= managerCandidates.Count - 1) managersIndex = 0;
+                            }
+                            week.Add(managerCandidates[managersIndex++]);
+                        }
+                    }
+                    // Panelers
+                    if (panelersIndex >= panelCandidates.Count - 1) panelersIndex = 0;
+                    if (week.IndexOf(panelCandidates[panelersIndex]) == -1)
+                    {
+                        week.Add(panelCandidates[panelersIndex++]);
+                    }
+                    else
+                    {
+                        while (week.IndexOf(panelCandidates[panelersIndex]) > -1)
+                        {
+                            panelersIndex++;
+                            if (managersIndex >= panelCandidates.Count - 1) panelersIndex = 0;
+                        }
+                        week.Add(panelCandidates[panelersIndex++]);
+                    }
+
+                    // Microphoners
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (microphonersIndex >= microphoneCandidates.Count - 1) microphonersIndex = 0;
+                        if (week.IndexOf(microphoneCandidates[microphonersIndex]) == -1)
+                        {
+                            week.Add(microphoneCandidates[microphonersIndex++]);
+                        }
+                        else
+                        {
+                            while (week.IndexOf(microphoneCandidates[microphonersIndex]) > -1)
+                            {
+                                microphonersIndex++;
+                                if (microphonersIndex >= microphoneCandidates.Count - 1) microphonersIndex = 0;
+                            }
+                            week.Add(microphoneCandidates[microphonersIndex++]);
+                        }
+                    }
+
+                    weeks.Add(week);
+                }
+                foreach (List<Steward> list in weeks)
+                {
+                    foreach (Steward s in list)
+                    {
+                        Console.Write(s.Surname + " " + s.Name + " ");
+                    }
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Установите дату начала и конца срока");
             }
         }
     }

@@ -23,12 +23,12 @@
                     <DatePicker x:Name="end"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
-                            Margin="0,106,0,0"
+                            Margin="133,92,133,0"
                             Width="242"
                             Height="42"
                             Controls:TextBoxHelper.UseFloatingWatermark="True"
                             Controls:TextBoxHelper.Watermark="Конец периода" />
-                    <Button Content="СОЗДАТЬ" HorizontalAlignment="Center" Margin="0,0,0,20" Width="120" FontSize="14" Height="41" VerticalAlignment="Bottom"/>
+                    <Button Content="СОЗДАТЬ" HorizontalAlignment="Center" Margin="0,0,0,20" Width="120" FontSize="14" Height="41" VerticalAlignment="Bottom" Click="Button_Click_1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Участники">
